@@ -50,14 +50,7 @@ def extract_tables_from_pdf(pdf_path):
         if tabs:
             for tab in tabs:
                 table_text = tab.extract()
-                if table_text:
-                    table_text = [row + [service_dates] for row in table_text]
-                    table_text[0][-1] = "PAGE INFO"
-                    tables.append(table_text)
-                else:
-                    table_text = [row for row in table_text]
-                    table_text[0][-1] = "PAGE INFO"
-                    tables.append(table_text)
+                tables.append(table_text)
     return tables
 
 def split_multiline_cells(table):
@@ -125,8 +118,7 @@ def process_pdfs_in_folder(folder_path):
         tables = extract_tables_from_pdf(pdf_file)
         dataframes = tables_to_dataframes(tables)
         all_dataframes.extend(dataframes)
-        # stop processing after the first PDF for demonstration
-        # break
+        #break
     return all_dataframes
 
 # Main code
